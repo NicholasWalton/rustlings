@@ -20,8 +20,13 @@ fn total_cost(item_quantity: &str) -> Result<i32, ParseIntError> {
     let processing_fee = 1;
     let cost_per_item = 5;
 
-    // TODO: Handle the error case as described above.
-    let qty = item_quantity.parse::<i32>();
+    let qty = item_quantity.parse::<i32>()?;
+
+    // the long way:
+    // match qty {
+    //     Ok(qty) => {Ok(qty * cost_per_item + processing_fee)}
+    //     Err(e) => { Err(e) }
+    // }
 
     Ok(qty * cost_per_item + processing_fee)
 }
@@ -32,8 +37,9 @@ fn main() {
 
 #[cfg(test)]
 mod tests {
-    use super::*;
     use std::num::IntErrorKind;
+
+    use super::*;
 
     #[test]
     fn item_quantity_is_a_valid_number() {
