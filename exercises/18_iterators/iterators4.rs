@@ -1,8 +1,5 @@
-fn factorial(num: u64) -> u64 {
-    // TODO: Complete this function to return the factorial of `num` which is
-    // defined as `1 * 2 * 3 * … * num`.
-    // https://en.wikipedia.org/wiki/Factorial
-    //
+fn factorial(num: u8) -> u64 {
+    // TODO: Complete this function to return the factorial of `num`.
     // Do not use:
     // - early returns (using the `return` keyword explicitly)
     // Try not to use:
