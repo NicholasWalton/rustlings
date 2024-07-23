@@ -1,12 +1,10 @@
 fn factorial(num: u8) -> u64 {
-    // TODO: Complete this function to return the factorial of `num`.
-    // Do not use:
-    // - early returns (using the `return` keyword explicitly)
-    // Try not to use:
-    // - imperative style loops (for/while)
-    // - additional variables
-    // For an extra challenge, don't use:
-    // - recursion
+    // match num {
+    //     0 => 1,
+    //     num => factorial(num - 1) * u64::from(num),
+    // }
+    // (2..=num).fold(1, |acc, x|  {acc * u64::from(x)})
+    (2..=u64::from(num)).product()
 }
 
 fn main() {
