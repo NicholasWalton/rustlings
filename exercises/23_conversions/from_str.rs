@@ -7,7 +7,6 @@
 
 use std::num::ParseIntError;
 use std::str::FromStr;
-use crate::ParsePersonError::ParseInt;
 
 #[derive(Debug, PartialEq)]
 struct Person {
@@ -49,10 +48,10 @@ impl FromStr for Person {
         if name.is_empty() {
             return Err(ParsePersonError::NoName);
         }
-        let age = age.parse::<u8>().map_err(ParseInt)?;
+        let age = age.parse().map_err(ParsePersonError::ParseInt)?;
         Ok(Self {
-                name: name.to_string(),
-                age
+                name: name.into(),
+                age,
         })
     }
 }
