@@ -7,6 +7,7 @@
 
 use std::num::ParseIntError;
 use std::str::FromStr;
+use crate::ParsePersonError::ParseInt;
 
 #[derive(Debug, PartialEq)]
 struct Person {
@@ -41,7 +42,22 @@ enum ParsePersonError {
 impl FromStr for Person {
     type Err = ParsePersonError;
 
-    fn from_str(s: &str) -> Result<Self, Self::Err> {}
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        let [name, age] = s.split(',').collect::<Vec<_>>()[..] else {
+            return Err(ParsePersonError::BadLen);
+        };
+        if name.is_empty() {
+            return Err(ParsePersonError::NoName);
+        }
+        let age = age.parse::<u8>();
+        match age {
+            Ok(age) => Ok(Self {
+                name: name.to_string(),
+                age
+            }),
+            Err(e) => Err(ParseInt(e)),
+        }
+    }
 }
 
 fn main() {
