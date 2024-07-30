@@ -49,14 +49,11 @@ impl FromStr for Person {
         if name.is_empty() {
             return Err(ParsePersonError::NoName);
         }
-        let age = age.parse::<u8>();
-        match age {
-            Ok(age) => Ok(Self {
+        let age = age.parse::<u8>().map_err(ParseInt)?;
+        Ok(Self {
                 name: name.to_string(),
                 age
-            }),
-            Err(e) => Err(ParseInt(e)),
-        }
+        })
     }
 }
 
